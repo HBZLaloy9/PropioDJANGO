@@ -187,7 +187,7 @@
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">My Task</p>
                     </a>
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <a href="{% url 'login_vista' %}" class="btn btn-outline-primary mx-3 mt-2 d-block" id="logout">Logout</a>
                   </div>
                 </div>
               </li>
@@ -243,6 +243,7 @@
   <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
   <script src="../assets/js/sidebarmenu.js"></script>
   <script src="../assets/js/app.min.js"></script>
+  <script src= "{% static 'js/alerts/alert_logout.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 </body>
 

@@ -105,9 +105,8 @@
                 </span>
                 <span class="hide-menu">Register</span>
               </a>
-              <a href="{% url 'logout' %}" class="btn" id="logout">Logout</a>
-            </li>
-            <li class="nav-small-cap">
+              <a href="{% url 'logout' %}" class="btn" id="logout" onclick="confirmLogout(event)">Logout</a>
+              <li class="nav-small-cap">
               <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4" class="fs-6"></iconify-icon>
               <span class="hide-menu">EXTRA</span>
             </li>
@@ -189,7 +188,7 @@
                       <i class="ti ti-list-check fs-6"></i>
                       <p class="mb-0 fs-3">My Task</p>
                     </a>
-                    <a href="{% url 'logout' %}" class="btn" id="logout">Logout</a>
+                    <a href="{% url 'logout' %}" class="btn" id="logout" onclick="confirmLogout(event)">Logout</a>
                   </div>
                 </div>
               </li>
@@ -475,14 +474,42 @@
         </div>
       </div>
     </div>
+    <!-- Librerías externas -->
     <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'libs/apexcharts/dist/apexcharts.min.js' %}"></script>
     <script src="{% static 'libs/simplebar/dist/simplebar.js' %}"></script>
+
+    <!-- Scripts propios -->
     <script src="{% static 'js/sidebarmenu.js' %}"></script>
     <script src="{% static 'js/app.min.js' %}"></script>
     <script src="{% static 'js/dashboard.js' %}"></script>
+
+    <!-- Alerta SweetAlert debe cargarse antes de tu script personalizado -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/alerts/alert_logout.js' %}"></script>
+    <script>
+      function confirmLogout(event) {
+        event.preventDefault(); // Previene la redirección inmediata
+        Swal.fire({
+          title: '¿Estás seguro?',
+          text: "¡Perderás tu sesión actual!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, desconectar!',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = '{% url "logout" %}'; // Redirige solo si el usuario confirma
+          }
+        });
+      }
+    </script>
+    <!-- Iconify al final (no depende de las demás librerías) -->
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
 </body>
 
 </html>

@@ -1,4 +1,6 @@
 document.getElementById('logout').addEventListener('click', function (event) {
+    event.preventDefault(); // Previene la redirección inmediata
+
     Swal.fire({
         title: '¿Estás seguro?',
         text: "¡Perderás tu sesión actual!",
@@ -10,7 +12,7 @@ document.getElementById('logout').addEventListener('click', function (event) {
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = '/logout/'; // Redirige a la URL de logout si se confirma
+            window.location.href = '{% url "logout" %}'; // Redirige solo si el usuario confirma
         }
     });
 });
